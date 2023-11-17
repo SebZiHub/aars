@@ -48,7 +48,6 @@
 						<li class="list-inline-item"><i class="fa fa-clock-o" aria-hidden="true"></i> {{ event.timeStr }}</li>
 						<li class="list-inline-item"><i class="fa fa-location-arrow" aria-hidden="true"><span v-html="event.location"></span></li>
 					</ul>
-					<span v-html="event.description"></span>
 				</div>
 			</div>
 			<br />
@@ -67,7 +66,7 @@
     	data: {
 		currentDate: new Date().setHours(0, 0, 0, 0),
 		eventData: [
-			{ eDate: "2023-11-25", dayNo: "25", monthStr: "NOV", name: "Cube in Zürich", dayStr: "Samstag", timeStr: "13:45 - 17:00", location: "<a target='_blank' href='https://maps.app.goo.gl/vFZEtNKQBbDjfG9VA'>Züghusplatz</a>", description: "" }
+			{ eDate: "2023-11-25", dayNo: "25", monthStr: "NOV", name: "Cube in Zürich", dayStr: "Samstag", timeStr: "13:45 - 17:00", location: "<a target='_blank' href='https://maps.app.goo.gl/vFZEtNKQBbDjfG9VA'>Züghusplatz</a>" }
 		]
         },
         methods: {
