@@ -46,7 +46,7 @@
 					<ul class="list-inline">
 				    		<li class="list-inline-item"><i class="fa fa-calendar-o" aria-hidden="true"></i> {{ event.dayStr }}</li>
 						<li class="list-inline-item"><i class="fa fa-clock-o" aria-hidden="true"></i> {{ event.timeStr }}</li>
-						<li class="list-inline-item"><i class="fa fa-location-arrow" aria-hidden="true"></i> {{ event.location }}</li>
+						<li class="list-inline-item"><i class="fa fa-location-arrow" aria-hidden="true"><span v-html="event.location"></span></li>
 					</ul>
 					<span v-html="event.description"></span>
 				</div>
@@ -57,7 +57,7 @@
 	</div>
       </section>
       <footer>
-        <p>Mehr von <a target="_blank" href="https://bit.ly/m/aars">AARS</a></p>
+        <p>Eine Anleitung zum Cube und weitere Ressourcen findest du <a target="_blank" href="https://bit.ly/m/aars">hier</a>.</p>
       </footer>
     </div>
     <script src="javascripts/scale.fix.js"></script>
@@ -65,14 +65,9 @@
     var app = new Vue({
 	el: '#app',
     	data: {
-		templateEventEntry: '{ eDate: "YYYY-MM-DD", dayNo: "DD", monthStr: "STR", name: "Standaktion", dayStr: "Samstag", timeStr: "10:30-16:30", location: "Igelweid", description: "<p>Anmeldung via Doodle folgt.</p>" }',
-		templateButtonRegister: "<form action='https://doodle.com/poll/XXXXXXXX' target='_blank'><input type='submit' class='btn btn-block btn-primary' value='Anmelden'></form>",
-                templateDescriptionPending: "<p>Anmeldung via Doodle folgt.</p>",
-		templateEventCancelled: "<p>EVENT WURDE ABGESAGT!</p>",
 		currentDate: new Date().setHours(0, 0, 0, 0),
 		eventData: [
-			{ eDate: "2020-10-31", dayNo: "31", monthStr: "OKT", name: "Flyeraktion", dayStr: "Samstag", timeStr: "12:00-15:30", location: "Kasinogarten", description: "<form action='https://doodle.com/poll/4cz3v49uhqcgpinx' target='_blank'><input type='submit' class='btn btn-block btn-primary' value='Anmelden'></form>" },
-			{ eDate: "2020-10-31", dayNo: "31", monthStr: "OKT", name: "Flyeraktion", dayStr: "Samstag", timeStr: "12:00-15:30", location: "Kasinogarten", description: "<form action='https://doodle.com/poll/4cz3v49uhqcgpinx' target='_blank'><input type='submit' class='btn btn-block btn-primary' value='Anmelden'></form>" }
+			{ eDate: "2023-11-25", dayNo: "25", monthStr: "NOV", name: "Cube in Zürich", dayStr: "Samstag", timeStr: "13:45 - 17:00", location: "<a target='_blank' href='https://maps.app.goo.gl/vFZEtNKQBbDjfG9VA'>Züghusplatz</a>", description: "" }
 		]
         },
         methods: {
