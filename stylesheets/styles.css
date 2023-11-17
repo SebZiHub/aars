@@ -269,6 +269,6 @@ footer {
   }
 }
 
-.fc-credit-button {
+.fc-credit-button .fc-button .fc-button-primary{
     display: none;
 }
