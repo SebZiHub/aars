@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Anonymous for Animal Rights Switzerland | Kalender</title>
+    <!-- BOOTSTRAP AND RELATED TOOLS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <!-- VUEJS -->
+    <!--<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>-->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+    <!-- ADDITIONAL CSS-->
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper" id="app">
+      <header>
+        <h1>Anonymous for Animal Rights Switzerland</h1>
+        <p>Der Kalender zum Aktivismus</p>
+      </header>
+      <section>
+        <div class="container">
+                <!--ENTRY START-->
+		<template v-for="event in eventData">			
+			<br />
+			<div class="row" v-if="eventIsCurrent(event.eDate)">
+				<div class="col-2">
+					<h1><span class="badge badge-secondary">{{ event.dayNo }}</span></h1>
+					<p>{{ event.monthStr }}<p>
+				</div>
+				<div class="col-10">
+					<h3 class="text-uppercase"><strong>{{ event.name }}</strong></h3>
+					<ul class="list-inline">
+				    		<li class="list-inline-item"><i class="fa fa-calendar-o" aria-hidden="true"></i> {{ event.dayStr }}</li>
+						<li class="list-inline-item"><i class="fa fa-clock-o" aria-hidden="true"></i> {{ event.timeStr }}</li>
+						<li class="list-inline-item"><i class="fa fa-location-arrow" aria-hidden="true"></i> {{ event.location }}</li>
+					</ul>
+					<span v-html="event.description"></span>
+				</div>
+			</div>
+			<br />
+		</template>
+                <!--ENTRY END-->
+	</div>
+      </section>
+      <footer>
+        <p>Mehr von <a target="_blank" href="https://bit.ly/m/aars">Anonymous for Animal Rights Switzerland</a></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    <script>
+    var app = new Vue({
+	el: '#app',
+    	data: {
+		templateEventEntry: '{ eDate: "YYYY-MM-DD", dayNo: "DD", monthStr: "STR", name: "Standaktion", dayStr: "Samstag", timeStr: "10:30-16:30", location: "Igelweid", description: "<p>Anmeldung via Doodle folgt.</p>" }',
+		templateButtonRegister: "<form action='https://doodle.com/poll/XXXXXXXX' target='_blank'><input type='submit' class='btn btn-block btn-primary' value='Anmelden'></form>",
+                templateDescriptionPending: "<p>Anmeldung via Doodle folgt.</p>",
+		templateEventCancelled: "<p>EVENT WURDE ABGESAGT!</p>",
+		currentDate: new Date().setHours(0, 0, 0, 0),
+		eventData: [
+			{ eDate: "2024-10-31", dayNo: "31", monthStr: "OKT", name: "Flyeraktion", dayStr: "Samstag", timeStr: "12:00-15:30", location: "Kasinogarten", description: "<form action='https://doodle.com/poll/4cz3v49uhqcgpinx' target='_blank'><input type='submit' class='btn btn-block btn-primary' value='Anmelden'></form>" }
+		]
+        },
+        methods: {
+        	eventIsCurrent: function (eventDate) {
+        		var eDateParts = eventDate.split('-');
+        		var eDateObj = new Date(eDateParts[0], eDateParts[1] - 1, eDateParts[2]);
+        		return this.currentDate <= eDateObj.getTime(); // getTime implicit on currentDate
+        	}
+        }
+    });
+    </script>
+  </body>
+</html>
