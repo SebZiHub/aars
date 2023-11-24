@@ -24,38 +24,41 @@
   <body>
     <div class="wrapper" id="app">
       <header>
-        <h1>AARS-Cube Kalender</h1>
-        <p>Alle Cubes von Anonymous for Animal Rights Switzerland</p>
+        <h1>Cube Kalender</h1>
+        <p>“Anonymous for Animal Rights Switzerland” setzt sich für die Rechte der Tiere ein. Auf der Strasse bilden wir einen “Cube” und zeigen den Menschen mit Schweizer Aufnahmen, was hinter den Tierprodukten steckt. Mit interessierten Passanten führen wir Gespräche, wobei im Vordergrund die ethischen Aspekte und die Verantwortung jeder einzelnen Person stehen.</p>
+	<p>Masken, Schilder und Visitenkarten werden zur Verfügung gestellt. Achte bitte auf eine schwarze/möglichst dunkle Kleidung und bring, wenn möglich, ein Laptop/Tablet mit den entsprechenden Aufnahmen mit. Teste vorab, wie das Video in der Endlosschleife abgespielt und die Helligkeit auf dem Gerät auf höchster Stufe eingestellt wird.</p>
+	<p>Das Cube Video, unseren Outreach Guide und weitere Ressourcen findest du <a href="https://bit.ly/m/aars">hier</a>.</p>
+	<p>Bring zur Aktion bitte möglichst wenig Gepäck mit. Alle zum Cube mitgebrachten Gegenstände unterliegen deiner eigenen Verantwortung. Das Organisationsteam kann dafür keine Verantwortung übernehmen.</p>
+	<p>Nach dem Cube gehen wir gerne noch gemeinsam essen/trinken und tauschen uns aus.</p>
+	<p>Danke für deinen Einsatz!</p>
       </header>
       <section>
         <div class="container">
-                <iframe src="https://embed.styledcalendar.com/#yEfkJNZRAyluXaRrrPDH" title="Styled Calendar" class="styled-calendar-container" style="width: 100%; height: 1000px; border: none;" data-cy="calendar-embed-iframe"></iframe>
-<script async type="module" src="https://embed.styledcalendar.com/assets/parent-window.js"></script>
-                <!--Not sure if I'll ever need the stuff below but let's leave it here for now... -->
                 <!--ENTRY START-->
 		<template v-for="event in eventData">
 			<br />
 			<div class="row" v-if="eventIsCurrent(event.eDate)">
 				<div class="col-2">
-					<h1><span class="badge badge-secondary">{{ event.dayNo }}</span></h1>
-					<p>{{ event.monthStr }}<p>
+					<h1><span class="badge badge-secondary"><span v-html="getEventDay(event.eDate)"></span></span></h1>
+					<p><span v-html="getEventMonth(event.eDate)"></span><p>
 				</div>
 				<div class="col-10">
 					<h3 class="text-uppercase"><strong>{{ event.name }}</strong></h3>
 					<ul class="list-inline">
 				    		<li class="list-inline-item"><i class="fa fa-calendar-o" aria-hidden="true"></i> {{ event.eDate }}</li>
 						<li class="list-inline-item"><i class="fa fa-clock-o" aria-hidden="true"></i> {{ event.timeStr }}</li>
-						<span v-html="event.location"></span>
+						<span v-html="getLocationHTML(event.eLocation)"></span>
 					</ul>
 				</div>
 			</div>
 			<br />
 		</template>
+                <a target="_blank" href="https://calendar.google.com/calendar/embed?src=ac777afc379bf8bb3957cda6dbcd8240e31e90023c3593823e23b2018c059d7c%40group.calendar.google.com&ctz=Europe%2FParis" class="btn btn-primary" role="button">Als Google Kalender</a>
                 <!--ENTRY END-->
 	</div>
       </section>
       <footer>
-        <p>Eine Anleitung zum Cube und weitere Ressourcen findest du <a target="_blank" href="https://bit.ly/m/aars">hier</a>.</p>
+        <!--<p>Eine Anleitung zum Cube und weitere Ressourcen findest du <a target="_blank" href="https://bit.ly/m/aars">hier</a>.</p>-->
       </footer>
     </div>
     <script src="javascripts/scale.fix.js"></script>
@@ -65,14 +68,95 @@
     	data: {
 		currentDate: new Date().setHours(0, 0, 0, 0),
 		eventData: [
-			{ eDate: "2020-11-25", dayNo: "25", monthStr: "NOV", name: "Cube in Zürich", timeStr: "13:45 - 17:00", location: "<li class='list-inline-item'><i class='fa fa-location-arrow' aria-hidden='true'> <a target='_blank' href='https://maps.app.goo.gl/vFZEtNKQBbDjfG9VA'>Züghusplatz</a></li>" }
+			{ eDate: "2023-11-25", name: "Cube in Zürich", timeStr: "13:45 - 17:00", eLocation: "Züghusplatz" },
+			{ eDate: "2024-03-02", name: "Cube in Aarau", timeStr: "13:45 - 17:00", eLocation: "Igelweid" },
+			{ eDate: "2024-03-23", name: "Cube in Zürich", timeStr: "13:45 - 17:00", eLocation: "Züghusplatz" },
+			{ eDate: "2024-04-20", name: "Cube in Zürich", timeStr: "13:45 - 17:00", eLocation: "Hirschenplatz" },
+			{ eDate: "2024-04-27", name: "Cube in Aarau", timeStr: "13:45 - 17:00", eLocation: "Igelweid" },
+			{ eDate: "2024-05-18", name: "Cube in Zürich", timeStr: "13:45 - 17:00", eLocation: "Züghusplatz" },
+			{ eDate: "2024-05-25", name: "Cube in Aarau", timeStr: "13:45 - 17:00", eLocation: "Igelweid" },
+			{ eDate: "2024-06-22", name: "Cube in Zürich", timeStr: "13:45 - 17:00", eLocation: "Hirschenplatz" },
+			{ eDate: "2024-06-29", name: "Cube in Aarau", timeStr: "13:45 - 17:00", eLocation: "Igelweid" },
+			{ eDate: "2024-07-20", name: "Cube in Zürich", timeStr: "13:45 - 17:00", eLocation: "Bellevue" },
+			{ eDate: "2024-07-27", name: "Cube in Aarau", timeStr: "13:45 - 17:00", eLocation: "Igelweid" },
+			{ eDate: "2024-08-24", name: "Cube in Zürich", timeStr: "13:45 - 17:00", eLocation: "Bellevue" },
+			{ eDate: "2024-08-31", name: "Cube in Aarau", timeStr: "13:45 - 17:00", eLocation: "Igelweid" },
+			{ eDate: "2024-09-21", name: "Cube in Zürich", timeStr: "13:45 - 17:00", eLocation: "Hirschenplatz" },
+			{ eDate: "2024-09-28", name: "Cube in Aarau", timeStr: "13:45 - 17:00", eLocation: "Igelweid" },
+			{ eDate: "2024-10-19", name: "Cube in Zürich", timeStr: "13:45 - 17:00", eLocation: "Züghusplatz" },
+			{ eDate: "2024-10-26", name: "Cube in Aarau", timeStr: "13:45 - 17:00", eLocation: "Igelweid" }
 		]
         },
         methods: {
         	eventIsCurrent: function (eventDate) {
         		var eDateParts = eventDate.split('-');
         		var eDateObj = new Date(eDateParts[0], eDateParts[1] - 1, eDateParts[2]);
-        		return this.currentDate <= eDateObj.getTime(); // getTime implicit on currentDate
+        		return this.currentDate <= eDateObj.getTime(); // getTime implicit on this.currentDate
+        	},
+        	getLocationHTML: function (eventLocationID) {
+			var locationHTML = "";
+			switch (eventLocationID) {
+				case "Züghusplatz":
+					locationHTML = "<li class='list-inline-item'><i class='fa fa-location-arrow' aria-hidden='true'> <a target='_blank' href='https://maps.app.goo.gl/vFZEtNKQBbDjfG9VA'>Züghusplatz</a></li>";
+					break;
+				case "Bellevue":
+					locationHTML = "<li class='list-inline-item'><i class='fa fa-location-arrow' aria-hidden='true'> <a target='_blank' href='https://maps.app.goo.gl/9iWubHDUifcqybPf9'>Bellevue</a></li>";
+					break;
+                                case "Igelweid":
+                                        locationHTML = "<li class='list-inline-item'><i class='fa fa-location-arrow' aria-hidden='true'> <a target='_blank' href='https://maps.app.goo.gl/f8c4833enDBUP7EZ8'>Igelweid</a></li>";
+                                        break;
+                                case "Hirschenplatz":
+                                        locationHTML = "<li class='list-inline-item'><i class='fa fa-location-arrow' aria-hidden='true'> <a target='_blank' href='https://maps.app.goo.gl/aLUemvAVwHh3KfgYA'>Hirschenplatz</a></li>";
+                                        break;
+			}
+			return locationHTML;
+        	},
+        	getEventDay: function (eventDate) {
+			var eDateParts = eventDate.split('-');
+			return eDateParts[2];
+        	},
+        	getEventMonth: function (eventDate) {
+			var eDateParts = eventDate.split('-');
+			var eventMonth = "";
+			switch (eDateParts[1]) {
+                                case "01":
+                                        eventMonth = "JAN";
+                                        break;
+                                case "02":
+                                        eventMonth = "FEB";
+                                        break;
+                                case "03":
+                                        eventMonth = "MÄR";
+                                        break;
+                                case "04":
+                                        eventMonth = "APR";
+                                        break;
+                                case "05":
+                                        eventMonth = "MAI";
+                                        break;
+                                case "06":
+                                        eventMonth = "JUN";
+                                        break;
+                                case "07":
+                                        eventMonth = "JUL";
+                                        break;
+                                case "08":
+                                        eventMonth = "AUG";
+                                        break;
+                                case "09":
+                                        eventMonth = "SEP";
+                                        break;
+                                case "10":
+                                        eventMonth = "OKT";
+                                        break;
+				case "11":
+					eventMonth = "NOV";
+					break;
+                                case "12":
+                                        eventMonth = "DEZ";
+                                        break;
+			}
+			return eventMonth;
         	}
         }
     });
